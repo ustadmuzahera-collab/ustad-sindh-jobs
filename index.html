@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Ustad G Job Sindh - latest jobs, MCQs and current affairs">
+<title>Ustad G Job Sindh</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fa;color:#17212b}
+header{background:#073451;color:#fff;position:sticky;top:0;z-index:5}.nav{max-width:1150px;margin:auto;display:flex;align-items:center;gap:5px;padding:0 15px}.brand{font-size:21px;font-weight:800;margin-right:auto;padding:17px 5px}.nav a{color:#fff;text-decoration:none;font-weight:700;padding:17px 12px}.nav a:hover{background:#0b466a}
+.hero{background:linear-gradient(135deg,#073451,#0872b2);color:#fff;padding:55px 18px}.wrap{max-width:1150px;margin:auto}.hero h1{font-size:44px;margin:0 0 8px}.hero p{font-size:18px}.search{background:#fff;border-radius:10px;padding:7px;display:flex;max-width:700px}.search input{flex:1;border:0;padding:13px;font-size:16px;outline:0}.btn{border:0;background:#0872b2;color:#fff;border-radius:7px;padding:10px 15px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}.btn.green{background:#16834b}.btn.gray{background:#687684}.section{padding:35px 18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.jobs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card,.job{background:#fff;border:1px solid #dce5ec;border-radius:12px;padding:20px;box-shadow:0 5px 18px #0000000b}.job{border-left:5px solid #0872b2}.job-poster{width:100%;max-height:330px;object-fit:cover;border-radius:10px;margin-bottom:12px}.modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:18px;z-index:999}.modal.show{display:flex}.modal-card{background:#fff;max-width:850px;width:100%;max-height:90vh;overflow:auto;border-radius:14px;padding:22px}.close{float:right;border:0;background:#eee;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer}.meta{display:flex;gap:7px;flex-wrap:wrap}.meta span{background:#eef4f8;border-radius:6px;padding:5px 8px;font-size:13px}.actions{display:flex;gap:8px;margin-top:15px;flex-wrap:wrap}.hidden{display:none!important}input,textarea,select{width:100%;padding:11px;border:1px solid #ccd7df;border-radius:7px;font:inherit}textarea{min-height:110px}.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.full{grid-column:1/-1}.notice{padding:12px;border-radius:8px;background:#fff6dc;border:1px solid #ecd48d}.admin{background:#fff}.job-list-empty{text-align:center;padding:30px;background:#fff;border:1px dashed #ccd7df;border-radius:10px}footer{background:#082b42;color:#fff;padding:28px 18px;margin-top:20px}
+@media(max-width:800px){.nav{flex-wrap:wrap}.nav a{padding:11px 7px}.brand{width:100%;padding-bottom:5px}.hero h1{font-size:34px}.grid,.jobs,.form{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<header><nav class="nav"><div class="brand">Ustad G Job Sindh</div><a href="#home">Home</a><a href="#jobs">Jobs</a><a href="#mcqs">MCQs</a><a href="#current">Current Affairs</a><a href="#admin">Admin</a><a href="#contact">Contact</a></nav></header>
+
+<section class="hero" id="home"><div class="wrap">
+<h1>Ustad G Job Sindh</h1><p>Jobs, government vacancies, MCQs and current affairs — all in one place.</p>
+<div class="search"><input id="search" placeholder="Search jobs or departments..." oninput="renderJobs()"><button class="btn" onclick="renderJobs()">Search</button></div>
+</div></section>
+
+<section class="section" id="jobs"><div class="wrap"><h2>Latest Jobs</h2><div id="jobsBox" class="jobs"></div></div></section>
+
+<section class="section" id="mcqs"><div class="wrap"><h2>MCQs Practice</h2><div class="card" id="quiz"></div><br><button class="btn" onclick="submitQuiz()">Submit Test</button> <button class="btn gray" onclick="resetQuiz()">Reset</button><h3 id="score"></h3></div></section>
+
+<section class="section" id="current"><div class="wrap"><h2>Current Affairs / GK</h2><div class="grid">
+<div class="card"><h3>Pakistan Studies</h3><p>Important Pakistan Studies notes and practice questions.</p></div>
+<div class="card"><h3>Islamiat</h3><p>Islamiat preparation and MCQs.</p></div>
+<div class="card"><h3>General Knowledge</h3><p>General knowledge for job-test preparation.</p></div>
+</div></div></section>
+
+<section class="section" id="admin"><div class="wrap"><h2>Admin Panel</h2>
+<div id="loginBox" class="card">
+<p>Only the website owner should use this panel.</p>
+<form onsubmit="login(event)" class="form"><div><label>Email</label><input id="email" type="email" required></div><div><label>Password</label><input id="password" type="password" required></div><div class="full"><button class="btn">Admin Login</button></div></form>
+<p id="loginMsg"></p></div>
+<div id="adminBox" class="card hidden">
+<p><b>Logged in as:</b> <span id="adminEmail"></span></p>
+<form onsubmit="addJob(event)" class="form">
+<div><label>Job Title</label><input id="title" required></div><div><label>Department</label><input id="department" required></div>
+<div><label>BPS</label><input id="bps" placeholder="BS-11"></div><div><label>Vacancies</label><input id="vacancies" placeholder="20"></div>
+<div><label>Last Date</label><input id="lastDate" placeholder="30 September 2026"></div><div><label>Apply URL</label><input id="applyUrl" type="url" placeholder="https://..."></div>
+<div class="full"><label>Description</label><textarea id="description"></textarea></div>
+<div class="full"><button class="btn green">Publish Job</button> <button type="button" class="btn gray" onclick="logout()">Logout</button></div>
+</form><p id="adminMsg"></p></div>
+</div></section>
+
+<section class="section" id="contact"><div class="wrap"><div class="card">
+<h2>Contact & Support</h2>
+<p><b>Ustad G Job Sindh</b></p>
+<p>For website/job information, use the official application links provided with each vacancy.</p>
+<hr style="border:0;border-top:1px solid #dce5ec;margin:20px 0">
+<h3>Support via Easypaisa</h3>
+<p>If you would like to support Ustad G Job Sindh:</p>
+<p style="font-size:20px"><b>📱 Easypaisa: 03422663285</b></p>
+<p><b>Account Name: Mazahir Ali</b></p>
+<p class="notice">Please verify the account name and number before sending any payment. Never share your Easypaisa PIN, OTP or password with anyone.</p>
+</div></div></section>
+<footer><div class="wrap">© 2026 Ustad G Job Sindh</div></footer>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import {getFirestore, collection, addDoc, getDocs, query, orderBy} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+/* PASTE YOUR FIREBASE CONFIG HERE */
+const firebaseConfig = {
+  apiKey: "PASTE_API_KEY",
+  authDomain: "PASTE_PROJECT.firebaseapp.com",
+  projectId: "PASTE_PROJECT_ID",
+  storageBucket: "PASTE_PROJECT.firebasestorage.app",
+  messagingSenderId: "PASTE_SENDER_ID",
+  appId: "PASTE_APP_ID"
+};
+
+let app,auth,db,online=false;
+try{
+ if(firebaseConfig.apiKey.startsWith("PASTE")) throw new Error("Firebase not configured");
+ app=initializeApp(firebaseConfig); auth=getAuth(app); db=getFirestore(app); online=true;
+}catch(e){console.warn("Firebase setup required. Demo jobs are shown.");}
+
+const demo=[{id:"nccia2026",title:"NCCIA Jobs 2026",department:"National Cyber Crime Investigation Agency (NCCIA)",bps:"BS-05 to BS-14",vacancies:"351",lastDate:"24 September 2026",applyUrl:"https://npftas.pk/",image:"nccia-job.png",description:"Career opportunities in the National Cyber Crime Investigation Agency (NCCIA). The shared notice shows the extended last date as 24 September 2026. Verify the latest official notice before applying.",details:"Vacancies shown in the notice: Sub Inspector (BS-14) — 48; Technical Assistant (BS-14) — 15; Stenotypist (BS-14) — 8; UDC (BS-11) — 6; ASI (BS-09) — 36; Constable (BS-05) — 174; Constable Driver (BS-05) — 64. Total: 351 vacancies. Apply through the official NPFTAS portal. Requirements, quota, age limit and other conditions should be checked in the current official advertisement."}];
+let jobs=[...demo];
+
+window.renderJobs=async function(){
+ const q=(document.getElementById("search").value||"").toLowerCase();
+ if(online){try{const snap=await getDocs(query(collection(db,"jobs"),orderBy("createdAt","desc")));jobs=[...demo,...snap.docs.map(d=>d.data())]}catch(e){console.warn(e)}}
+ const list=jobs.filter(j=>Object.values(j).join(" ").toLowerCase().includes(q));
+ document.getElementById("jobsBox").innerHTML=list.length?list.map(j=>`<article class="job">${j.image?`<img class="job-poster" src="${url(j.image)}" alt="${esc(j.title)}">`:""}<h3>${esc(j.title)}</h3><div class="meta"><span>${esc(j.department||"")}</span><span>${esc(j.bps||"")}</span><span>${esc(j.vacancies||"")} vacancies</span><span>Last Date: ${esc(j.lastDate||"")}</span></div><p>${esc(j.description||"")}</p><div class="actions"><button class="btn" onclick='openJob(${JSON.stringify(j).replace(/'/g,"&#39;")})'>View Full Details</button>${j.applyUrl?`<a class="btn green" target="_blank" rel="noopener" href="${url(j.applyUrl)}">Apply Online</a>`:""}</div></article>`).join(""):"<div class='job-list-empty'>No jobs found.</div>";
+};
+
+window.login=async function(e){e.preventDefault();if(!online){loginMsg.textContent="First connect Firebase (see SETUP.txt).";return}try{await signInWithEmailAndPassword(auth,email.value,password.value)}catch(x){loginMsg.textContent="Login failed. Check email/password."}};
+window.logout=()=>online&&signOut(auth);
+window.addJob=async function(e){e.preventDefault();if(!online)return;try{await addDoc(collection(db,"jobs"),{title:title.value,department:department.value,bps:bps.value,vacancies:vacancies.value,lastDate:lastDate.value,applyUrl:applyUrl.value,description:description.value,createdAt:Date.now()});e.target.reset();adminMsg.textContent="Job published successfully.";renderJobs()}catch(x){adminMsg.textContent="Could not publish. Check Firestore rules."}};
+window.submitQuiz=()=>{let s=0;quizData.forEach((x,i)=>{let a=document.querySelector(`input[name=q${i}]:checked`);if(a&&+a.value===x.a)s++});score.textContent=`Your Score: ${s}/${quizData.length}`};
+window.resetQuiz=()=>{document.querySelectorAll("#quiz input").forEach(x=>x.checked=false);score.textContent=""};
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function url(s){try{let u=new URL(s);return ["http:","https:"].includes(u.protocol)?u.href:"#"}catch{return "#"}}
+const quizData=[
+{q:"Which language is used to structure a web page?",o:["HTML","Python","SQL","C++"],a:0},
+{q:"What does CPU stand for?",o:["Central Processing Unit","Computer Personal Unit","Central Program Utility","Control Processing User"],a:0},
+{q:"What is 25% of 240?",o:["40","50","60","80"],a:2},
+{q:"Which is the capital of Pakistan?",o:["Karachi","Lahore","Islamabad","Peshawar"],a:2},
+{q:"How many provinces does Pakistan have?",o:["3","4","5","6"],a:1}
+];
+quiz.innerHTML=quizData.map((x,i)=>`<div style="margin:15px 0"><b>Q${i+1}. ${x.q}</b>${x.o.map((o,k)=>`<label style="display:block;padding:7px"><input type="radio" name="q${i}" value="${k}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+if(online)onAuthStateChanged(auth,u=>{loginBox.classList.toggle("hidden",!!u);adminBox.classList.toggle("hidden",!u);if(u)adminEmail.textContent=u.email});
+renderJobs();
+</script>
+
+<div class="share-box" style="margin:20px 0;padding:16px;border:1px solid #ddd;border-radius:12px;background:#fff">
+  <h3 style="margin-top:0">📤 Share This Website</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:10px">
+    <a href="#" onclick="shareWhatsApp();return false;" style="padding:10px 14px;border-radius:8px;background:#25D366;color:white;text-decoration:none">WhatsApp</a>
+    <a href="#" onclick="shareFacebook();return false;" style="padding:10px 14px;border-radius:8px;background:#1877F2;color:white;text-decoration:none">Facebook</a>
+    <a href="#" onclick="shareGoogle();return false;" style="padding:10px 14px;border-radius:8px;background:#4285F4;color:white;text-decoration:none">Google</a>
+    <button onclick="copyWebsiteLink()" style="padding:10px 14px;border:0;border-radius:8px;background:#444;color:white;cursor:pointer">🔗 Copy Link</button>
+    <button onclick="shareNative()" style="padding:10px 14px;border:0;border-radius:8px;background:#111;color:white;cursor:pointer">📱 More</button>
+  </div>
+  <p id="shareMsg" style="margin-bottom:0;font-size:14px"></p>
+</div>
+
+
+<script>
+function websiteShareText() {
+  return "Ustad G Job Sindh - Jobs, MCQs & Current Affairs";
+}
+function shareWhatsApp() {
+  const url = encodeURIComponent(window.location.href);
+  const msg = encodeURIComponent(websiteShareText() + " " + window.location.href);
+  window.open("https://wa.me/?text=" + msg, "_blank");
+}
+function shareFacebook() {
+  const url = encodeURIComponent(window.location.href);
+  window.open("https://www.facebook.com/sharer/sharer.php?u=" + url, "_blank", "width=700,height=500");
+}
+function shareGoogle() {
+  const url = encodeURIComponent(window.location.href);
+  const q = encodeURIComponent("Ustad G Job Sindh " + window.location.href);
+  window.open("https://www.google.com/search?q=" + q, "_blank");
+}
+async function copyWebsiteLink() {
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    document.getElementById("shareMsg").textContent = "✅ Website link copied. Ab WhatsApp/Facebook par paste kar dein.";
+  } catch(e) {
+    prompt("Website link copy karein:", window.location.href);
+  }
+}
+async function shareNative() {
+  if (navigator.share) {
+    try {
+      await navigator.share({title: "Ustad G Job Sindh", text: websiteShareText(), url: window.location.href});
+    } catch(e) {}
+  } else {
+    copyWebsiteLink();
+  }
+}
+</script>
+
+<div id="jobModal" class="modal" onclick="if(event.target===this) closeJob()"><div class="modal-card"><button class="close" onclick="closeJob()">×</button><div id="jobDetail"></div></div></div>
+<script>
+window.openJob=function(j){document.getElementById("jobDetail").innerHTML=`${j.image?`<img class="job-poster" src="${url(j.image)}" alt="${esc(j.title)}">`:""}<h2>${esc(j.title)}</h2><p><b>Department:</b> ${esc(j.department||"")}</p><p><b>Scale:</b> ${esc(j.bps||"")}</p><p><b>Total Vacancies:</b> ${esc(j.vacancies||"")}</p><p><b>Last Date:</b> ${esc(j.lastDate||"")}</p><h3>Vacancy Details</h3><p>${esc(j.details||j.description||"")}</p><p><b>Apply:</b> Use the official application portal linked below.</p><div class="actions">${j.applyUrl?`<a class="btn green" target="_blank" rel="noopener" href="${url(j.applyUrl)}">Apply Online</a>`:""}</div><p class="notice">Always verify the latest official advertisement before submitting an application.</p>`;document.getElementById("jobModal").classList.add("show")};
+window.closeJob=function(){document.getElementById("jobModal").classList.remove("show")};
+</script></body></html>
